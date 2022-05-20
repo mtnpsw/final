@@ -1,0 +1,150 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!-- Link library leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin="" />
+
+ <!-- W3 CSS template -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin="">
+</script>
+
+ <style>
+#mapid {
+height: 800px;
+}
+</style>
+
+ <title>Nepal Tourist map</title>
+</head>
+<body>
+<!-- แบ่งหน้าจอ -->
+<div class="w3-row">
+<div id="mapid" class="w3-half"></div>
+<div id="content" class="w3-half">
+<table class="w3-table w3-striped">
+<tr>
+<th>ชื่อแหล่งท่องเที่ยว</th>
+<th>ประเภท</th>
+<th>ระดับ</th>
+</tr>
+<tr>
+<td>น้ำตก A</td>
+<td>ธรรมชาติ</td>
+<td>A</td>
+</tr>
+</table>
+</div>
+</div>
+
+<!-- เรียกแผนที่ขึ้นมาแสดง -->
+<script>
+var map = L.map("mapid").setView([27.70000,85.33333],8);
+var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+
+var tourpoint = {
+type: "FeatureCollection",
+name: "tour_plk",
+crs: {
+type: "name",
+properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" },
+},
+features: [
+{
+type: "Feature",
+properties: {
+Name: "เมืองภักตปุระ (Bhaktapur)",
+Type: "เมืองเก่า",
+FID_1: 1358.0,
+level: "A",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[85.43244870437294,27.674128384461504]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "วัดปศุปฏินาถ",
+Type: "วัด",
+FID_1: 1357.0,
+level: "B",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[85.34864858144574,27.710664544241236]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "มหาเจดีย์พุทธนาถ",
+Type: "วัด",
+FID_1: 1362.0,
+level: "B",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[85.36194375261051,27.72178160617502]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "เทือกเขานากาก็อต",
+Type: "ธรรมชาติ",
+FID_1: 1364.0,
+level: "D",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[85.32474608788952,27.727883804868526]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "วัดสยมภูวนาถ – เมืองกาฐมาณฑุ์",
+Type: "วัด",
+FID_1: 1355.0,
+level: "D",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[85.34916767797917,27.713335395899684]],
+},
+},
+],
+
+var tourLayer = L.geoJSON(tourpoint, {
+pointToLayer: function (feature, latlng) {
+return L.marker(latlng).bindPopup(feature.properties.Name);
+},
+onEachFeature: function (feature, layer) {
+layer.on("mouseover", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.add("w3-red");
+});
+
+ layer.on("mouseout", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.remove("w3-red");
+});
+},
+}).addTo(map);
+
+</script> -->
+
+</body>
+</html>
